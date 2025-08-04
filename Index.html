@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   
+    
+    <link rel="stylesheet" href="style.css" />
+    <title>Age Calculator</title>
+  </head>
+  <body>
+
+            <h1 >Age Calculator</h1>
+
+            <div class="main">
+                 <div  id="app">
+
+    
+
+        <h3><span>Hi There! Please enter your date of birth</span> and i will tell you your age in years ,months and days. </h3>
+<div class="mybox">
+<h2>Input Here: </h2>
+        <form id="ageForm">
+
+          <div class="form-group">
+            <label for="dob" class="head ">Date of Birth:</label>
+            <input item 
+              type="date"
+              id="dob"
+              name="dob"
+              required
+            />
+            <br />
+
+            <div>
+                 <input id="submit"
+              type="submit"
+             
+              required
+            />
+            </div>
+           
+          </div>
+        </form>
+
+                      <div id="result" ></div>
+
+      </div>
+
+    </div>
+            </div>
+
+   
+
+    <script>
+
+        document.getElementById("ageForm").addEventListener("submit",function(event) {
+          event.preventDefault();
+
+          const dobInput = document.getElementById("dob").value;
+          const resultDiv = document.getElementById("result");
+
+            if (!dobInput) {
+          resultDiv.textContent = "Please enter your date of birth.";
+          return;
+        }
+
+        //today
+        const today=new Date();
+         const dob = new Date(dobInput);
+          if (dob > today) {
+          resultDiv.textContent = "Date of birth cannot be in the future!";
+          return;
+        }
+
+        let years = today.getFullYear() - dob.getFullYear();
+        let months =  today.getMonth() - dob.getMonth();
+        let days = today.getDate() - dob.getDate();
+
+        if (days < 0) {
+  months--;  
+  const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0); 
+  days += prevMonth.getDate(); 
+}
+
+   if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+        resultDiv.textContent = `You are ${years} years, ${months} months, and ${days} days old.`;
+
+         
+        });
+    </script>
+    
+  </body>
+</html>
